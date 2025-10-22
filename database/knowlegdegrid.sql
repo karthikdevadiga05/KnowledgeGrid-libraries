@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS `libraries` (
   `name` VARCHAR(120) NOT NULL,
   `city` VARCHAR(80) NOT NULL,
   `state` VARCHAR(80) NOT NULL,
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `map_url` VARCHAR(255) NULL
 );
 
 --Library Images
