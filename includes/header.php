@@ -28,7 +28,12 @@ require_once __DIR__ . '/db_connect.php';
                 <i class="fa-solid fa-book-open-reader logo-icon"></i>
                 <span class="company-name">KnowledgeGrid</span>
             </a>
-            
+        <?php   
+        function active($p)
+          {
+            return strpos($GLOBALS['path'], $p) !== false ? 'active' : '';
+          }
+        ?>
 
             <!-- Middle: Navigation Links -->
             <nav class="main-nav" id="main-nav">
@@ -48,10 +53,9 @@ require_once __DIR__ . '/db_connect.php';
                             class="btn btn-login">Manage Libraries</a>
                         <a href="/KnowledgeGrid-Libraries/modules/book_management/manage_books.php" class="btn btn-login">Manage
                             Books</a>
-                    <?php endif; ?>
-                    <?php if (is_user_logged_in()): ?>
+                    <?php elseif (is_user_logged_in()): ?>
                         <span class="muted">Hello, <?php echo htmlspecialchars(current_user_name()); ?></span>
-                        <a href="/KnowledgeGrid-Libraries/modules/borrow_purchase/my_books.php" class="btn btn-login">My Books</a>
+                        <a href="/KnowledgeGrid-Libraries/user/my_books.php" class="btn btn-login">My Books</a>
                         <a href="/KnowledgeGrid-Libraries/auth/logout.php" class="btn btn-login" aria-label="Logout"><i
                                 class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Logout</a>
                     <?php else: ?>

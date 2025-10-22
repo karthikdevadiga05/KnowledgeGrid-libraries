@@ -1,6 +1,7 @@
 <?php
 $page_css = '/KnowledgeGrid-Libraries/admin/css/manage_books.css';
 include_once '../includes/header.php';
+ if (!is_admin_logged_in()): header('Location: /KnowledgeGrid-Libraries/auth/login.php'); exit; endif;
 ?>
 <main>
     <section class="page-content container">

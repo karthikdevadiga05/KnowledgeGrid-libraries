@@ -6,7 +6,7 @@ include_once '../includes/header.php';
 <main class="form-page-container">
     <div class="registration-form">
         <h2>Create Your Account</h2>
-        <form id="registerForm" action="#" method="POST">
+        <form id="registerForm" action="" method="POST">
 
             <!-- Client-side error area -->
             <p id="clientError" class="muted" style="color: red; display: none;"></p>
@@ -209,8 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['user_id'] = $uid;
                     $_SESSION['user_name'] = $name;
                     $_SESSION['nearest_library_id'] = $lib['id'] ?? null;
-                    // NOTE: Ensure this redirect path is correct.
-                    header('Location: /knowledgegrid-libraries/modules/user_interaction/explore.php');
+                    header('Location: /knowledgegrid-libraries/user/explore.php');
                     exit;
                 } else {
                     $error_message = 'Could not create user account.';
