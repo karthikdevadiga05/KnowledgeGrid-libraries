@@ -33,10 +33,10 @@ require_once __DIR__ . '/db_connect.php';
             <!-- Middle: Navigation Links -->
             <nav class="main-nav" id="main-nav">
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Locations</a></li>
-                    <li><a href="#">Explore</a></li>
+                    <li><a href="<?php echo htmlspecialchars('/KnowledgeGrid-Libraries/index.php'); ?>">Home</a></li>
+                    <li><a href="<?php echo htmlspecialchars('/KnowledgeGrid-Libraries/user/explore.php'); ?>">Explore</a></li>
+                    <li><a href="<?php echo htmlspecialchars('/KnowledgeGrid-Libraries/book/view_books.php'); ?>">Books</a></li>
+                    <li><a href="<?php echo htmlspecialchars('/KnowledgeGrid-Libraries/library/view_libraries.php'); ?>">Libraries</a></li>
                 </ul>
             </nav>
 
@@ -55,10 +55,10 @@ require_once __DIR__ . '/db_connect.php';
                         <a href="/KnowledgeGrid-Libraries/auth/logout.php" class="btn btn-login" aria-label="Logout"><i
                                 class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Logout</a>
                     <?php else: ?>
-                        <a href="auth/login.php" class="btn btn-login"><i class="fa-solid fa-user"
+                        <a href="/KnowledgeGrid-Libraries/auth/login.php" class="btn btn-login"><i class="fa-solid fa-user"
                                 aria-hidden="true"></i>
                             Login</a>
-                        <a href="auth/register.php" class="btn btn-login"><i class="fa-solid fa-user-plus"
+                        <a href="/KnowledgeGrid-Libraries/auth/register.php" class="btn btn-login"><i class="fa-solid fa-user-plus"
                                 aria-hidden="true"></i> Register</a>
                     <?php endif; ?>
                 <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav">
