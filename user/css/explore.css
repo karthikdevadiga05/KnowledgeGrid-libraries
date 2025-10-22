@@ -1,0 +1,145 @@
+:root {
+    --primary-color: #0056b3;
+    --primary-hover: #003d80;
+    --secondary-color: #f4f4f4;
+    --text-color: #333;
+    --text-light: #fefefe;
+    --border-color: #ddd;
+    --header-height: 70px;
+    --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --card-radius: 8px;
+}
+
+.explore-header {
+    padding: 3rem 0;
+    text-align: center;
+    background-color: var(--secondary-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.explore-header p {
+    max-width: 600px;
+    margin: 0 auto 1.5rem auto;
+    color: #555;
+}
+
+.search-bar {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.search-bar i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 0.9rem 1rem 0.9rem 45px;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+}
+.search-bar input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+}
+
+.page-content {
+    padding: 3rem 0;
+}
+
+.library-card {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 2rem;
+}
+
+.book-card {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 0; /* Adjusted from 2rem */
+    overflow: hidden; /* To contain the image radius */
+    display: flex;
+    flex-direction: column;
+}
+
+.library-card-content {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.library-card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.library-details {
+    display: flex;
+    gap: 1rem;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.book-cover-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.book-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows this container to fill space */
+}
+
+.book-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.book-card .author {
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.book-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+.book-meta span {
+    background-color: var(--secondary-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: 5px;
+}
+
+.book-card .btn {
+    margin-top: 1rem;
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.7rem;
+}

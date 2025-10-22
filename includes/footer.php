@@ -1,6 +1,4 @@
-   <!-- =======================
-    FOOTER SECTION
-    ======================== -->
+<!-- footer section -->
     <footer class="site-footer">
         <div class="container footer-container">
             <div class="footer-column footer-about">
@@ -30,6 +28,6 @@
         </div>
     </footer>
 
-    <script src="assets/js/script.js"></script>
+    <script src="/KnowledgeGrid-Libraries/assets/js/script.js"></script>
 </body>
 </html>

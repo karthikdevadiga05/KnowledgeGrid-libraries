@@ -1,0 +1,80 @@
+:root {
+    --primary-color: #0056b3;
+    --primary-hover: #003d80;
+    --secondary-color: #f4f4f4;
+    --text-color: #333;
+    --text-light: #fefefe;
+    --border-color: #ddd;
+    --header-height: 70px;
+    --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --card-radius: 8px;
+}
+
+.page-content {
+    padding: 3rem 0;
+}
+
+.page-header p {
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.table-container {
+    overflow-x: auto; /* Ensures table is scrollable on small screens */
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    background-color: #fff;
+}
+
+.books-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.books-table th, .books-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.books-table thead {
+    background-color: var(--secondary-color);
+}
+
+.books-table th {
+    font-weight: 600;
+    color: #333;
+}
+
+.books-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.books-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.status-tag {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-requested {
+    background-color: #fff8e1;
+    color: #f57f17;
+}
+
+.status-purchased {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-borrowed {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
