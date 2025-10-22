@@ -27,7 +27,9 @@
             </div>
         </div>
     </footer>
-
+    <?php if (!empty($page_script)): ?>
+        <script src="<?php echo htmlspecialchars($page_script); ?>"></script>
+    <?php endif; ?>
     <script src="/KnowledgeGrid-Libraries/assets/js/script.js"></script>
 </body>
 </html>
