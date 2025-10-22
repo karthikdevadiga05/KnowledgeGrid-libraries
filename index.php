@@ -17,8 +17,7 @@
         <section id="libraries" class="carousel-section">
             <div class="container">
                 <h2>Our Libraries</h2>
-                <div class="carousel-container">
-                    
+                <div class="carousel-container">   
                     <!-- TEMPLATE CARD -->
                     <div class="card library-card">
                         <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=500&auto=format&fit=crop&q=60" alt="Interior of a modern library" class="card-image">

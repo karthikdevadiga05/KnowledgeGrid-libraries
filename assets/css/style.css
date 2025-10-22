@@ -1,6 +1,4 @@
-/* =======================
-GLOBAL & ROOT
-======================== */
+/* global styles */
 :root {
 --primary-color: #0056b3; /* Deep blue */
 --primary-hover: #003d80;
@@ -57,15 +55,14 @@ ul {
 list-style: none;
 }
 
-/* =======================
-REUSABLE COMPONENTS
-======================== */
+/* reusable styles for buttons */
 .btn {
 display: inline-block;
-padding: 0.75rem 1.5rem;
+padding: 0.5rem 1.25rem;  
 border: none;
-border-radius: 5px;
+border-radius: 4px;       
 font-weight: 600;
+font-size: 0.95rem;      
 text-align: center;
 cursor: pointer;
 transition: all 0.3s ease;
@@ -102,9 +99,7 @@ white-space: nowrap;
 border-width: 0;
 }
 
-/* =======================
-HEADER & NAVIGATION
-======================== */
+/* header and navigation styles */
 .site-header {
 height: var(--header-height);
 background-color: #fff;
@@ -171,7 +166,7 @@ gap: 1rem;
 .btn-login {
 background: var(--primary-color);
 color: var(--text-light);
-padding: 0.5rem 1rem;
+padding: 0.4rem 0.9rem;  /* Reduced from 0.5rem 1rem */
 display: flex;
 align-items: center;
 gap: 0.5rem;
@@ -189,9 +184,7 @@ cursor: pointer;
 color: var(--text-color);
 }
 
-/* =======================
-HERO SECTION
-======================== */
+/* hero section */
 .hero {
 height: 60vh;
 min-height: 400px;
@@ -226,9 +219,9 @@ opacity: 0.9;
 .hero-btn {
 background-color: var(--text-light);
 color: var(--primary-color);
-font-size: 1.1rem;
+font-size: 1rem;         /* Reduced from 1.1rem */
 font-weight: 700;
-padding: 0.8rem 2rem;
+padding: 0.6rem 1.75rem; /* Reduced from 0.8rem 2rem */
 }
 .hero-btn:hover {
 background-color: #eee;
@@ -236,9 +229,7 @@ color: var(--primary-hover);
 transform: translateY(-2px);
 }
 
-/* =======================
-MAIN CONTENT & SECTIONS
-======================== */
+/* main section styles */
 section {
 padding: 3rem 0;
 }
@@ -247,9 +238,7 @@ padding: 3rem 0;
 background-color: var(--secondary-color);
 }
 
-/* =======================
-CAROUSEL & CARDS
-======================== */
+/* carousel and cards styles */
 .carousel-container {
 display: flex;
 gap: 1.5rem;
@@ -318,9 +307,7 @@ font-size: 1.5rem;
 color: var(--text-light);
 }
 
-/* =======================
-EXPLORE SECTION
-======================== */
+/* explore section styles */
 .explore-section {
 text-align: center;
 background-color: var(--primary-color);
@@ -347,9 +334,7 @@ padding: 1rem;
 border-radius: var(--card-radius);
 }
 
-/* =======================
-FOOTER
-======================== */
+/* footer styles */
 .site-footer {
 background-color: #222;
 color: #aaa;
@@ -459,7 +444,7 @@ RESPONSIVE (MOBILE)
 }
 
 .btn-login {
-    padding: 0.5rem 0.8rem;
+    padding: 0.4rem 0.9rem;  /* Reduced from 0.5rem 1rem */
 }
 
 .hero-title {
