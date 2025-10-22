@@ -11,7 +11,6 @@ require_once __DIR__ . '/db_connect.php';
     <title>KnowledgeGrid Libraries</title>
     <!-- Font Awesome for icons (hamburger, login, etc.) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
     
     <!-- Common css file -->
     <link rel="stylesheet" href="/KnowledgeGrid-Libraries/assets/css/style.css">
@@ -56,10 +55,10 @@ require_once __DIR__ . '/db_connect.php';
                         <a href="/KnowledgeGrid-Libraries/auth/logout.php" class="btn btn-login" aria-label="Logout"><i
                                 class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Logout</a>
                     <?php else: ?>
-                        <a href="/KnowledgeGrid-Libraries/auth/login.php" class="btn btn-login"><i class="fa-solid fa-user"
+                        <a href="auth/login.php" class="btn btn-login"><i class="fa-solid fa-user"
                                 aria-hidden="true"></i>
                             Login</a>
-                        <a href="/KnowledgeGrid-Libraries/auth/register.php" class="btn btn-login"><i class="fa-solid fa-user-plus"
+                        <a href="auth/register.php" class="btn btn-login"><i class="fa-solid fa-user-plus"
                                 aria-hidden="true"></i> Register</a>
                     <?php endif; ?>
                 <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav">
