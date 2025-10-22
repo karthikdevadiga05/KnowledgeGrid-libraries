@@ -1,0 +1,109 @@
+:root {
+    --primary-color: #0056b3;
+    --primary-hover: #003d80;
+    --secondary-color: #f4f4f4;
+    --text-color: #333;
+    --text-light: #fefefe;
+    --border-color: #ddd;
+    --header-height: 70px;
+    --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --card-radius: 8px;
+}
+.page-content {
+    padding: 3rem 0;
+}
+
+.management-section {
+    background: #fff;
+    padding: 2rem;
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    margin-bottom: 3rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+}
+
+.management-section .btn-primary {
+    width: 100%;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+.table-container {
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+}
+
+.libraries-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.libraries-table th, .libraries-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.libraries-table thead {
+    background-color: var(--secondary-color);
+}
+
+.libraries-table th {
+    font-weight: 600;
+}
+
+.libraries-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.libraries-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.action-cell {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-edit, .btn-delete {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+.btn-edit {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+.btn-edit:hover {
+        background-color: #bbdefb;
+}
+.btn-delete {
+    background-color: #ffebee;
+    color: #c62828;
+}
+    .btn-delete:hover {
+    background-color: #ffcdd2;
+}
