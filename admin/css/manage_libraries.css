@@ -107,3 +107,20 @@
     .btn-delete:hover {
     background-color: #ffcdd2;
 }
+
+/* validations */
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+input.error {
+    border-color: #dc3545;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}

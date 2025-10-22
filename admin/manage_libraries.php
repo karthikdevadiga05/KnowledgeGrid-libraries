@@ -1,7 +1,7 @@
 <?php
 $page_css = '/KnowledgeGrid-Libraries/admin/css/manage_libraries.css';
 include_once '../includes/header.php';
- if (!is_admin_logged_in()): header('Location: /KnowledgeGrid-Libraries/auth/login.php'); exit; endif;
+if (!is_admin_logged_in()): header('Location: /KnowledgeGrid-Libraries/auth/login.php'); exit; endif;
 ?>
 <main>
     <section class="page-content container">
@@ -10,20 +10,46 @@ include_once '../includes/header.php';
         <!-- ADD LIBRARY FORM -->
         <section class="management-section">
             <h2>Add Library</h2>
-            <form>
+            <form id="addLibraryForm" novalidate aria-labelledby="formTitle">
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="name" id="nameLabel">Name</label>
+                    <input type="text" 
+                           id="name" 
+                           name="name" 
+                           required 
+                           minlength="3"
+                           aria-required="true"
+                           aria-labelledby="nameLabel"
+                           aria-describedby="nameError">
+                    <span id="nameError" class="error-message" role="alert"></span>
                 </div>
                 <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" id="city" name="city" required>
+                    <label for="city" id="cityLabel">City</label>
+                    <input type="text" 
+                           id="city" 
+                           name="city" 
+                           required
+                           minlength="2"
+                           aria-required="true"
+                           aria-labelledby="cityLabel"
+                           aria-describedby="cityError">
+                    <span id="cityError" class="error-message" role="alert"></span>
                 </div>
                 <div class="form-group">
-                    <label for="state">State</label>
-                    <input type="text" id="state" name="state" required>
+                    <label for="state" id="stateLabel">State</label>
+                    <input type="text" 
+                           id="state" 
+                           name="state" 
+                           required
+                           minlength="2"
+                           aria-required="true"
+                           aria-labelledby="stateLabel"
+                           aria-describedby="stateError">
+                    <span id="stateError" class="error-message" role="alert"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" 
+                        class="btn btn-primary"
+                        aria-label="Create new library">Create</button>
             </form>
         </section>
 
@@ -76,6 +102,13 @@ include_once '../includes/header.php';
 
     </section>
 </main>
+
+<!-- form validation script -->
+<script src="/KnowledgeGrid-Libraries/admin/js/manage_libraries.js"></script>
+
+<!-- Add some CSS for error states -->
+
+
 <?php
 include_once '../includes/footer.php';
 ?>
