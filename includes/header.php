@@ -49,9 +49,9 @@ require_once __DIR__ . '/db_connect.php';
             <div class="header-right">
                 <?php if (is_admin_logged_in()): ?>
                         <span class="btn btn-login" title="You are logged in as admin">Admin</span>
-                        <a href="/KnowledgeGrid-Libraries/modules/library_management/manage_library.php"
+                        <a href="/KnowledgeGrid-Libraries/admin/manage_libraries.php"
                             class="btn btn-login">Manage Libraries</a>
-                        <a href="/KnowledgeGrid-Libraries/modules/book_management/manage_books.php" class="btn btn-login">Manage
+                        <a href="/KnowledgeGrid-Libraries/admin/manage_books.php" class="btn btn-login">Manage
                             Books</a>
                     <?php elseif (is_user_logged_in()): ?>
                         <span class="muted">Hello, <?php echo htmlspecialchars(current_user_name()); ?></span>

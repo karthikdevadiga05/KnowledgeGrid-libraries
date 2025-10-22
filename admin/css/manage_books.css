@@ -1,53 +1,37 @@
-:root {
-    --primary-color: #0056b3;
-    --primary-hover: #003d80;
-    --secondary-color: #f4f4f4;
-    --text-color: #333;
-    --text-light: #fefefe;
-    --border-color: #ddd;
-    --header-height: 70px;
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --card-radius: 8px;
+
+
+/* This is the delete link in your PHP */
+.badge {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 4px;
+    background-color: #ffebee;
+    color: #c62828;
+    text-decoration: none;
+}
+.badge:hover {
+    background-color: #ffcdd2;
 }
 
-.page-content {
-    padding: 3rem 0;
-}
-
-.management-section {
+section[aria-labelledby="book-form-title"] {
     background: #fff;
     padding: 2.5rem;
     border-radius: var(--card-radius);
     box-shadow: var(--card-shadow);
-    border: 1px solid var(--border-color);
     margin-bottom: 3rem;
 }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+form div {
+    margin-bottom: 1rem;
 }
-
-@media (min-width: 768px) {
-    .form-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .form-group.full-width {
-        grid-column: 1 / -1;
-    }
-}
-
-.form-group label {
+form label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
+    font-size: 0.9rem;
 }
-
-.form-group input,
-.form-group select,
-.form-group textarea {
+form input, form select, form textarea {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--border-color);
@@ -55,161 +39,226 @@
     font-size: 1rem;
     font-family: inherit;
 }
-
-.form-group textarea {
+form textarea {
     min-height: 100px;
     resize: vertical;
 }
-
-.form-group select[multiple] {
-    display: none;
-    /* Hide the original select */
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+form input:focus, form select:focus, form textarea:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
 }
 
-/* Custom Multi-select Dropdown */
-.custom-multiselect {
-    position: relative;
-}
-
-.select-box {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1rem;
-    font-family: inherit;
-    cursor: pointer;
+/* This targets the 2-column layout in your form */
+.stack-sm {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+@media (min-width: 768px) {
+    .stack-sm {
+        flex-direction: row;
+    }
 }
 
-.select-box::after {
-    content: '\f078';
-    /* Font Awesome down arrow */
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-}
-
-.options-container {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: #fff;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.options-container.active {
-    display: block;
-}
-
-.option {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0.75rem;
-    cursor: pointer;
-}
-
-.option:hover {
-    background-color: var(--secondary-color);
-}
-
-.option input {
-    margin-right: 0.5rem;
-}
-
-.management-section .btn-primary {
+section[aria-labelledby="book-form-title"] .btn-primary {
     width: 100%;
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
     margin-top: 1rem;
 }
 
-.table-container {
-    overflow-x: auto;
-    border: 1px solid var(--border-color);
+section[aria-labelledby="books-list-title"] {
+    background: #fff;
     border-radius: var(--card-radius);
     box-shadow: var(--card-shadow);
+    overflow: hidden; /* To contain table border radius */
+    border: 1px solid var(--border-color);
 }
 
-.books-table {
+section[aria-labelledby="books-list-title"] h2 {
+    padding: 1.5rem 1.5rem 0 1.5rem;
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
-    text-align: left;
 }
-
-.books-table th,
-.books-table td {
-    padding: 1rem;
+thead tr {
+    background-color: var(--secondary-color);
     border-bottom: 1px solid var(--border-color);
 }
-
-.books-table thead {
+th, td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    vertical-align: top;
+}
+th {
+    font-weight: 600;
+}
+tbody tr:nth-child(even) {
+    background-color: #fff;
+}
+tbody tr:nth-child(odd) {
     background-color: var(--secondary-color);
 }
 
-.books-table th {
-    font-weight: 600;
+/* This styles the mapping form row */
+td[colspan="4"] {
+    padding: 1.5rem;
+    background: #fff;
+    border-bottom: 2px solid var(--border-color); /* Extra separator */
+}
+td[colspan="4"] form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: flex-end;
+}
+td[colspan="4"] form label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+td[colspan="4"] form input, 
+td[colspan="4"] form select {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+}
+td[colspan="4"] form .btn-primary {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    width: 100%;
 }
 
-.books-table tbody tr:last-child td {
-    border-bottom: none;
+@media (min-width: 768px) {
+     td[colspan="4"] form {
+        grid-template-columns: 3fr 1fr 1fr 1.5fr;
+    }
+    td[colspan="4"] form .btn-primary {
+        width: auto;
+    }
 }
 
-.books-table tbody tr:hover {
-    background-color: #f9f9f9;
-}
 
-.action-cell {
+.site-footer {
+    background-color: #222;
+    color: #aaa;
+    padding: 3rem 0;
+    font-size: 0.9rem;
+    margin-top: 3rem;
+}
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.footer-column h4 {
+    color: var(--text-light);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+.footer-column p {
+    line-height: 1.7;
+}
+.footer-links ul {
     display: flex;
+    flex-direction: column;
     gap: 0.5rem;
+    list-style: none;
 }
-
-.btn-primary {
-    background-color: var(--primary-color);
+.footer-links a {
+    color: #aaa;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
     color: var(--text-light);
 }
-
-.btn-primary:hover {
+.subscribe-form {
+    display: flex;
+    margin-top: 0.5rem;
+}
+.subscribe-form input[type="email"] {
+    flex-grow: 1;
+    border: 1px solid #555;
+    background-color: #333;
+    padding: 0.75rem;
+    color: var(--text-light);
+    border-radius: 5px 0 0 5px;
+}
+.subscribe-form .btn {
+    border-radius: 0 5px 5px 0;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 0.75rem 1rem;
+}
+.subscribe-form .btn:hover {
     background-color: var(--primary-hover);
 }
-
-.btn-edit,
-.btn-delete {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-    border-radius: 4px;
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
-.btn-edit {
-    background-color: #e3f2fd;
-    color: #1565c0;
+/* =======================
+   RESPONSIVE (MOBILE)
+   ======================== */
+@media (max-width: 767px) {
+    .main-nav, .header-right {
+        display: none; 
+    }
+    .hamburger {
+        display: block; 
+        font-size: 1.5rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: var(--text-color);
+    }
+    
+    .main-nav {
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .main-nav.is-active { display: flex; }
+    .main-nav .nav-links { flex-direction: column; gap: 0.5rem; }
+    .main-nav .nav-links a { display: block; padding: 0.8rem; }
+    
+    .header-right {
+         position: absolute;
+         top: calc(var(--header-height) + 16rem); /* Position below nav */
+         left: 0;
+         width: 100%;
+         background: #fff;
+         padding: 1rem;
+         box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+         flex-direction: column;
+         gap: 1rem;
+    }
+    .header-right.is-active {
+        display: flex;
+    }
+
+    /* Stack table form elements */
+    td[colspan="4"] form {
+        grid-template-columns: 1fr;
+    }
 }
 
-.btn-edit:hover {
-    background-color: #bbdefb;
-}
-
-.btn-delete {
-    background-color: #ffebee;
-    color: #c62828;
-}
-
-.btn-delete:hover {
-    background-color: #ffcdd2;
-}

@@ -3,112 +3,122 @@ $page_css = '/KnowledgeGrid-Libraries/admin/css/manage_libraries.css';
 include_once '../includes/header.php';
 if (!is_admin_logged_in()): header('Location: /KnowledgeGrid-Libraries/auth/login.php'); exit; endif;
 ?>
-<main>
-    <section class="page-content container">
-        <h1>Manage Libraries</h1>
 
-        <!-- ADD LIBRARY FORM -->
-        <section class="management-section">
-            <h2>Add Library</h2>
-            <form id="addLibraryForm" novalidate aria-labelledby="formTitle">
-                <div class="form-group">
-                    <label for="name" id="nameLabel">Name</label>
-                    <input type="text" 
-                           id="name" 
-                           name="name" 
-                           required 
-                           minlength="3"
-                           aria-required="true"
-                           aria-labelledby="nameLabel"
-                           aria-describedby="nameError">
-                    <span id="nameError" class="error-message" role="alert"></span>
-                </div>
-                <div class="form-group">
-                    <label for="city" id="cityLabel">City</label>
-                    <input type="text" 
-                           id="city" 
-                           name="city" 
-                           required
-                           minlength="2"
-                           aria-required="true"
-                           aria-labelledby="cityLabel"
-                           aria-describedby="cityError">
-                    <span id="cityError" class="error-message" role="alert"></span>
-                </div>
-                <div class="form-group">
-                    <label for="state" id="stateLabel">State</label>
-                    <input type="text" 
-                           id="state" 
-                           name="state" 
-                           required
-                           minlength="2"
-                           aria-required="true"
-                           aria-labelledby="stateLabel"
-                           aria-describedby="stateError">
-                    <span id="stateError" class="error-message" role="alert"></span>
-                </div>
-                <button type="submit" 
-                        class="btn btn-primary"
-                        aria-label="Create new library">Create</button>
-            </form>
-        </section>
+<main class="container" aria-labelledby="lib-manage-title">
+    <h1 id="lib-manage-title">Manage Libraries</h1>
+    <?php
+    // Create / Update
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name = trim($_POST['name'] ?? '');
+        $city = trim($_POST['city'] ?? '');
+        $state = trim($_POST['state'] ?? '');
+        $id = isset($_POST['id']) && $_POST['id'] !== '' ? (int)$_POST['id'] : null;
 
-        <!-- LIBRARIES TABLE -->
-        <section>
-            <h2>Libraries</h2>
-            <div class="table-container">
-                <table class="libraries-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Central City Library</td>
-                            <td>Bengaluru</td>
-                            <td>Karnataka</td>
-                            <td class="action-cell">
-                                <button class="btn btn-edit">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                            <tr>
-                            <td>Coastal Reads Library</td>
-                            <td>Chennai</td>
-                            <td>Tamil Nadu</td>
-                            <td class="action-cell">
-                                <button class="btn btn-edit">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Downtown Knowledge Hub</td>
-                            <td>Dharwad</td>
-                            <td>Karnataka</td>
-                            <td class="action-cell">
-                                <button class="btn btn-edit">Edit</button>
-                                <button class="btn btn-delete">Delete</button>
-                            </td>
-                        </tr>
-                        <!-- Add more rows as needed -->
-                    </tbody>
-                </table>
+        if ($name !== '' && $city !== '' && $state !== '') {
+            if ($id) {
+                $stmt = $conn->prepare('UPDATE libraries SET name=?, city=?, state=? WHERE id=?');
+                $stmt->bind_param('sssi', $name, $city, $state, $id);
+                $stmt->execute();
+            } else {
+                $stmt = $conn->prepare('INSERT INTO libraries (name, city, state) VALUES (?,?,?)');
+                $stmt->bind_param('sss', $name, $city, $state);
+                $stmt->execute();
+            }
+        }
+        header('Location: manage_libraries.php');
+        exit;
+    }
+
+    // Delete library
+    if (isset($_GET['delete'])) {
+        $did = (int)$_GET['delete'];
+        // Use prepared statements for deletion
+        $stmt = $conn->prepare('DELETE FROM library_books WHERE library_id = ?');
+        $stmt->bind_param('i', $did);
+        $stmt->execute();
+
+        $stmt = $conn->prepare('DELETE FROM libraries WHERE id = ?');
+        $stmt->bind_param('i', $did);
+        $stmt->execute();
+
+        header('Location: manage_libraries.php');
+        exit;
+    }
+
+    // Edit fetch
+    $edit = null;
+    if (isset($_GET['edit'])) {
+        $eid = (int)$_GET['edit'];
+        $stmt = $conn->prepare('SELECT id, name, city, state FROM libraries WHERE id = ?');
+        $stmt->bind_param('i', $eid);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $edit = $result && $result->num_rows ? $result->fetch_assoc() : null;
+    }
+    ?>
+
+    <section aria-labelledby="lib-form-title">
+        <h2 id="lib-form-title"><?php echo $edit ? 'Edit Library' : 'Add Library'; ?></h2>
+        <form method="post" novalidate>
+            <?php if ($edit): ?>
+                <input type="hidden" name="id" value="<?php echo (int)$edit['id']; ?>">
+            <?php endif; ?>
+            <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" required 
+                       value="<?php echo htmlspecialchars($edit['name'] ?? ''); ?>">
             </div>
-        </section>
+            <div>
+                <label for="city">City</label>
+                <input id="city" name="city" required 
+                       value="<?php echo htmlspecialchars($edit['city'] ?? ''); ?>">
+            </div>
+            <div>
+                <label for="state">State</label>
+                <input id="state" name="state" required 
+                       value="<?php echo htmlspecialchars($edit['state'] ?? ''); ?>">
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <?php echo $edit ? 'Update' : 'Create'; ?>
+            </button>
+        </form>
+    </section>
 
+    <section aria-labelledby="lib-list-title" style="margin-top:1rem">
+        <h2 id="lib-list-title">Libraries</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                $stmt = $conn->prepare('SELECT id, name, city, state FROM libraries ORDER BY name');
+                $stmt->execute();
+                $result = $stmt->get_result();
+                while($lib = $result->fetch_assoc()): 
+                ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($lib['name']); ?></td>
+                    <td><?php echo htmlspecialchars($lib['city']); ?></td>
+                    <td><?php echo htmlspecialchars($lib['state']); ?></td>
+                    <td class="stack-sm">
+                        <a class="badge" href="manage_libraries.php?edit=<?php echo (int)$lib['id']; ?>">Edit</a>
+                        <a class="badge" href="manage_libraries.php?delete=<?php echo (int)$lib['id']; ?>" 
+                           onclick="return confirm('Delete this library?');">Delete</a>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
     </section>
 </main>
 
-<!-- form validation script -->
-<script src="/KnowledgeGrid-Libraries/admin/js/manage_libraries.js"></script>
-
-<!-- Add some CSS for error states -->
-
-
 <?php
+$page_script = '/KnowledgeGrid-Libraries/admin/js/manage_libraries.js';
 include_once '../includes/footer.php';
 ?>
