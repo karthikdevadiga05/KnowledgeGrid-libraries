@@ -2,44 +2,146 @@
 $page_css = '/KnowledgeGrid-Libraries/admin/css/manage_libraries.css';
 include_once '../includes/header.php';
 if (!is_admin_logged_in()): header('Location: /KnowledgeGrid-Libraries/auth/login.php'); exit; endif;
+
+// Initialize variables
+$error_message = '';
+$success_message = '';
+$edit = null;
+
+// Handle Delete Operation
+if (isset($_GET['delete'])) {
+    $did = (int)$_GET['delete'];
+    try {
+        // Start transaction for safe deletion
+        $conn->begin_transaction();
+
+        // First delete from library_books
+        $stmt = $conn->prepare('DELETE FROM library_books WHERE library_id = ?');
+        $stmt->bind_param('i', $did);
+        $stmt->execute();
+
+        // Then delete the library
+        $stmt = $conn->prepare('DELETE FROM libraries WHERE id = ?');
+        $stmt->bind_param('i', $did);
+        $stmt->execute();
+
+        // Commit transaction
+        $conn->commit();
+        header('Location: manage_libraries.php?success=2');
+        exit;
+    } catch (Exception $e) {
+        $conn->rollback();
+        $error_message = "Error deleting library: " . $e->getMessage();
+    }
+}
+
+// Handle Edit Fetch
+if (isset($_GET['edit'])) {
+    $eid = (int)$_GET['edit'];
+    $stmt = $conn->prepare('SELECT id, name, city, state FROM libraries WHERE id = ?');
+    $stmt->bind_param('i', $eid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $edit = $result->fetch_assoc();
+}
+
+// Handle Create/Update Operation
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = trim($_POST['name'] ?? '');
+    $city = trim($_POST['city'] ?? '');
+    $state = trim($_POST['state'] ?? '');
+    $id = isset($_POST['id']) ? (int)$_POST['id'] : null;
+
+    if (empty($name) || empty($city) || empty($state)) {
+        $error_message = "All fields are required.";
+    } else {
+        try {
+            if ($id) {
+                // Update existing library
+                $stmt = $conn->prepare('UPDATE libraries SET name = ?, city = ?, state = ? WHERE id = ?');
+                $stmt->bind_param('sssi', $name, $city, $state, $id);
+                $stmt->execute();
+                $success_message = "Library updated successfully!";
+            } else {
+                // Create new library
+                $stmt = $conn->prepare('INSERT INTO libraries (name, city, state) VALUES (?, ?, ?)');
+                $stmt->bind_param('sss', $name, $city, $state);
+                $stmt->execute();
+                $success_message = "Library added successfully!";
+            }
+            header('Location: manage_libraries.php?success=1');
+            exit;
+        } catch (Exception $e) {
+            $error_message = "Error: " . $e->getMessage();
+        }
+    }
+}
 ?>
+
 
 <main class="container" aria-labelledby="lib-manage-title">
     <h1 id="lib-manage-title">Manage Libraries</h1>
-    
+
+    <?php if ($error_message): ?>
+        <div class="alert alert-error" role="alert">
+            <?php echo htmlspecialchars($error_message); ?>
+        </div>
+    <?php endif; ?>
+
     <?php if (isset($_GET['success'])): ?>
-        <div class="form-success" role="alert">
-            <?php echo $_GET['success'] == 1 ? 'Library updated successfully!' : 'Library deleted successfully!'; ?>
+        <div class="alert alert-success" role="alert">
+            <?php 
+            if ($_GET['success'] == 1) {
+                echo "Library operation completed successfully!";
+            } else if ($_GET['success'] == 2) {
+                echo "Library deleted successfully!";
+            }
+            ?>
         </div>
     <?php endif; ?>
 
     <section aria-labelledby="lib-form-title" class="form-section">
-        <h2 id="lib-form-title"><?php echo isset($_GET['edit']) ? 'Edit Library' : 'Add Library'; ?></h2>
-        <form method="post" novalidate class="library-form">
-            <?php if (isset($_GET['edit'])): ?>
-                <input type="hidden" name="id" value="<?php echo (int)$_GET['edit']; ?>">
+        <h2 id="lib-form-title"><?php echo $edit ? 'Edit Library' : 'Add Library'; ?></h2>
+        <form method="POST" novalidate class="library-form">
+            <?php if ($edit): ?>
+                <input type="hidden" name="id" value="<?php echo (int)$edit['id']; ?>">
             <?php endif; ?>
             
             <div class="form-group">
                 <label for="name">Library Name</label>
-                <input type="text" id="name" name="name" required value="<?php echo htmlspecialchars($edit['name'] ?? ''); ?>" placeholder="Enter library name">
+                <input type="text" 
+                       id="name" 
+                       name="name" 
+                       required 
+                       value="<?php echo htmlspecialchars($edit['name'] ?? ''); ?>"
+                       placeholder="Enter library name">
             </div>
 
             <div class="form-group">
                 <label for="city">City</label>
-                <input type="text" id="city" name="city" required value="<?php echo htmlspecialchars($edit['city'] ?? ''); ?>" placeholder="Enter city name">
+                <input type="text" 
+                       id="city" 
+                       name="city" 
+                       required 
+                       value="<?php echo htmlspecialchars($edit['city'] ?? ''); ?>"
+                       placeholder="Enter city name">
             </div>
 
             <div class="form-group">
                 <label for="state">State</label>
-                <input type="text" id="state" name="state" required value="<?php echo htmlspecialchars($edit['state'] ?? ''); ?>" placeholder="Enter state name">
+                <input type="text" 
+                       id="state" 
+                       name="state" 
+                       required 
+                       value="<?php echo htmlspecialchars($edit['state'] ?? ''); ?>"
+                       placeholder="Enter state name">
             </div>
 
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">
-                    <?php echo isset($_GET['edit']) ? 'Update Library' : 'Add Library'; ?>
+                    <?php echo $edit ? 'Update Library' : 'Add Library'; ?>
                 </button>
-                <?php if (isset($_GET['edit'])): ?>
+                <?php if ($edit): ?>
                     <a href="manage_libraries.php" class="btn btn-secondary">Cancel</a>
                 <?php endif; ?>
             </div>
@@ -88,6 +190,5 @@ if (!is_admin_logged_in()): header('Location: /KnowledgeGrid-Libraries/auth/logi
         </div>
     </section>
 </main>
-
 
 <?php include_once '../includes/footer.php'; ?>
