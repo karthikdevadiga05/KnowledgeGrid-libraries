@@ -140,7 +140,7 @@ a.badge[href*="edit="]:hover {
 }
 
 .form-group input:focus {
-    border-color: #3498db;
+    border-color: #0056b3;;
     outline: none;
     box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
 }
@@ -226,7 +226,7 @@ a.badge[href*="edit="]:hover {
 }
 
 .btn-primary {
-    background: #3498db;
+    background: #0056b3;;
     color: white;
 }
 

@@ -60,7 +60,7 @@ include_once '../includes/header.php';
             <button type="submit" class="btn btn-primary">Register</button>
 
             <p class="login-link">
-                Already have an account? <a href="login.html">Login here</a>
+                Already have an account? <a href="/knowledgegrid-libraries/auth/login.php">Login here</a>
             </p>
         </form>
     </div>

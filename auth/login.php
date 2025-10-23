@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn btn-primary">Login</button>
 
                 <p class="register-link">
-                    New user? <a href="login.php">Register here</a>.
+                    New user? <a href="knowledgegrid-libraries/auth/register.php">Register here</a>.
                 </p>
             </form>
         </div>

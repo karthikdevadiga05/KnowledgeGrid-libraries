@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" style="margin: 20px auto;">
                     <?php echo $edit ? 'Update Library' : 'Add Library'; ?>
                 </button>
                 <?php if ($edit): ?>
