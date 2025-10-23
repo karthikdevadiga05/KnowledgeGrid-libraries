@@ -44,8 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $res = $stmt->get_result();
       if ($admin = $res->fetch_assoc()) {
         if (password_verify($password, $admin['password_hash'])) {
-          $_SESSION['admin_id'] = (int)$admin['id'];
-          $_SESSION['admin_name'] = $admin['name'];
+          $_SESSION['user_id'] = (int)$admin['id'];  // Changed from admin_id
+          $_SESSION['user_name'] = $admin['name'];    // Changed from admin_name
+          $_SESSION['is_admin'] = true;               // Add this line to set admin flag
           header('Location: /KnowledgeGrid-Libraries/admin/manage_libraries.php');
           exit;
         }
@@ -65,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $_SESSION['user_id'] = (int)$user['id'];
           $_SESSION['user_name'] = $user['name'];
           $_SESSION['nearest_library_id'] = $lib['id'] ?? null;
-          header('Location: /BookX/modules/user_interaction/explore.php');
+          header('Location: /knowledgegrid-libraries/user/explore.php');
           exit;
         }
       }
